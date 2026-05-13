@@ -1,0 +1,13 @@
+{
+    "editor.rulers": [
+        {
+            "column": 74,
+            "color": "#f8090977"
+        }
+    ],
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true,
+    "[c]": {
+        "editor.defaultFormatter": "ms-vscode.cpptools"
+    }
+}
