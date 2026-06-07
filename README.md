@@ -8,3 +8,5 @@ Als Referenzimplementierung ist Quellcode aus 'A Painless Guide to CRC Error Det
 Algorithms' beigefügt.
 
 Gebaut wird das Projekt mit CMake. Die Referenzimplementierung wird mit Make gebaut.
+
+Ebenfalls ist eine KI generierte Website dabei, die eine Hardware CRC Implementierung simuliert.

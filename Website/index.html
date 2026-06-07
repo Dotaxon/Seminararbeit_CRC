@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!-- ⚡ Vibe coded — results should be taken with a grain of salt. -->
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CRC Shift Register Visualizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <h1>CRC Shift Register Visualizer</h1>
+
+  <!-- ── Configuration ─────────────────────────────────────────────── -->
+  <section class="config-row card">
+    <label>
+      Register width:
+      <input id="reg-width" type="number" min="2" max="64" value="8" />
+      bits
+    </label>
+    <span class="sep">|</span>
+    <fieldset id="fmt-group">
+      <legend>Message format</legend>
+      <label><input type="radio" name="fmt" value="ascii" checked /> ASCII</label>
+      <label><input type="radio" name="fmt" value="hex" /> Hex</label>
+      <label><input type="radio" name="fmt" value="binary" /> Binary</label>
+    </fieldset>
+  </section>
+
+  <!-- ── Message Input ─────────────────────────────────────────────── -->
+  <section class="message-row card">
+    <label for="msg-input">Message</label>
+    <textarea id="msg-input" rows="2" spellcheck="false" placeholder="Type your message here…">Hello</textarea>
+    <div class="message-actions">
+      <button id="btn-apply" class="btn btn-primary">&#9654; Apply</button>
+      <span id="parse-error" class="parse-error" hidden></span>
+    </div>
+  </section>
+
+  <!-- ── Visualization ─────────────────────────────────────────────── -->
+  <section class="viz-section card">
+    <!-- top row: shifted-out LED | register LEDs | bit preview -->
+    <div class="viz-row">
+      <!-- Shifted-out bit -->
+      <div class="shifted-out-area">
+        <div class="shifted-out-label">out</div>
+        <div id="shifted-out-led" class="led led-off faded"></div>
+      </div>
+      <div class="arrow-led">&#8592;</div>
+
+      <!-- Register + checkboxes container -->
+      <div class="register-and-taps">
+        <div class="register-label">shift register</div>
+        <div id="register-leds" class="register-leds">
+          <!-- LEDs injected by JS -->
+        </div>
+        <div id="tap-row" class="tap-row">
+          <!-- tap checkboxes + always-active marker injected by JS -->
+        </div>
+        <div class="tap-labels">
+          <span class="tap-label-text">XOR taps (polynomial)</span>
+        </div>
+      </div>
+
+      <div class="arrow-led">&#8592;</div>
+
+      <!-- Bit preview -->
+      <div class="preview-area">
+        <div class="preview-label">next bits</div>
+        <div id="bit-preview" class="bit-preview">
+          <!-- preview dots injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Hex value display -->
+    <div class="hex-row">
+      Register&nbsp;=&nbsp;<span class="hex-prefix">0x</span><span id="hex-value">00</span>
+    </div>
+  </section>
+
+  <!-- ── Status ────────────────────────────────────────────────────── -->
+  <section class="status-row card">
+    <div class="status-item">
+      <span class="status-label">Phase</span>
+      <span id="phase-indicator" class="status-value phase-message">Message</span>
+    </div>
+    <div class="status-item">
+      <span class="status-label">Step</span>
+      <span id="step-counter" class="status-value">0 / 0</span>
+    </div>
+    <div class="status-item" id="flush-item" hidden>
+      <span class="status-label">Flush</span>
+      <span id="flush-counter" class="status-value">0 / 0</span>
+    </div>
+  </section>
+
+  <!-- ── Controls ──────────────────────────────────────────────────── -->
+  <section class="controls-row card">
+    <button id="btn-step" class="btn btn-primary">&#9654; Step</button>
+
+    <label class="auto-label">
+      <input id="auto-toggle" type="checkbox" />
+      Auto
+    </label>
+    <label class="interval-label">
+      <span>Interval</span>
+      <input id="auto-interval" type="number" min="50" max="10000" value="1000" />
+      <span>ms</span>
+    </label>
+
+    <button id="btn-reset" class="btn btn-secondary">&#8635; Reset</button>
+  </section>
+
+  <script src="script.js"></script>
+
+  <footer class="vibe-footer">
+    &#9889; Vibe coded &mdash; results should be taken with a grain of salt.
+  </footer>
+</body>
+</html>
